@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="../css/Payment.css">
+    <!-- Gsap animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <!-- Link for the PWA android app -->
+    <link rel="manifest" href="../manifest.json">
+    <!-- PWA setting -->
+    <script src="../src/index.js"></script>
+</head>
+<body>
+<!-- This is the website top header-->
+<div class="header">
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="las la-bars"></label>
+
+    <a href="../index.html" class="logo">Auction<span>.</span></a>
+
+    <nav class="navbar">
+        <a href="../index.html">Home</a>
+        <a href="Auctions.html">Auctions</a>
+        <a href="#">Sell</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <!--
+    <div id="beforLogin" class="icons">
+        <a href="Sign-in.html" class="las la-user" id="Login">Login</a>
+        <a id="useremail" class="las la-user" style="display:none"></a>
+        <a id="signoutlink" class="las la-user" style="display:none">Sign Out</a>
+    </div>
+    -->
+
+    <div class="icons" onclick="menuToggle();">
+      <a class="las la-user-circle" id="login-btn"></a>
+      <!--<div class="las la-bars" id="menu-btn"></div>-->
+  </div>
+  
+  <div class="icons-menu">
+    <h3 id="useremail" style="display: none;"><h3 id="guest" style="display: block;">GUEST</h3></h3>
+    <ul>
+        <li id="login-li"><i class="las la-sign-in-alt"></i><a href="../Pages/Sign-in.html" id="Login">Sign-in</a></li>
+        <li id="profile-li" style="display: none;"><i class="las la-user"></i><a href="Profile.html">Profile</a></li>
+        <li id="checkticket-li" style="display: none;"><i class="las la-clipboard-check" ></i><a href="Hisotry.html">Purchase Hisotry</a></li>
+        <li><i class="las la-question-circle"></i><a href="#contact">Help</a></li>
+        <li id="signoutlink-li" style="display: none;"><i class="las la-share-square"></i><a href="#" id="signoutlink">Sign-out</a></li>
+    </ul>
+</div>
+
+  
+</div>
+    <!-- This is selection -->
+<div class="container">
+    <div class="list-container">
+        <div class="left-col">
+
+        </div>
+        <div class="right-col">
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Post auciton form -->
+<section class="home">
+
+  <div class="form-container">
+      <form action="">
+          <h1>Payment</h1>
+
+          <div class="inputBox-card">
+              <i class="las la-credit-card"></i>
+              <span>Card number</span>
+              <input type="text" placeholder="XXXX XXXX XXXX XXXX" id="card-number" required>
+          </div>
+
+          <div class="inputBox">
+              <div class="input-label">
+                  <i class="las la-user-edit"></i>
+                  <span>Card Holder's name</span>
+              </div>
+              <input type="text" placeholder="" id="CVV-number" required>
+          </div>
+
+          <div class="inputBox">
+              <div class="input-label">
+                  <i class="las la-lock"></i>
+                  <span>CVV number</span>
+              </div>
+              <input type="text" placeholder="XXX" id="CVV-number" required>
+          </div>
+
+          <div class="inputBox-date">
+              <div class="input-label">
+                  <i class="las la-calendar"></i>
+                  <span>Expiry Date</span>
+              </div>
+              <div class="input-date">
+                  <input type="text" placeholder="MM" id="date-MM" required>
+                  <p>/</p>
+                  <input type="text" placeholder="YY" id="date-YY" required>
+              </div>
+          </div>
+
+          <input type="button" value="Pay now" class="btn" id="pay-btn" onclick="payment_alert()">
+      </form>
+  </div>
+</section>
+
+<script type="module"></script>
+<script src="../JS/animation_Sell.js"></script>
+<script src="../JS/confirm_payment.js"></script> 
+
+<!--Login funciton js-->
+<script type="module" src="../JS/logging.js"></script>
+</body>
+</html>

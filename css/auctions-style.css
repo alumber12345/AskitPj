@@ -1,0 +1,403 @@
+:root{
+    --pink:#0490FE;
+    --black: #9D9C9B;
+    --gap: 2rem;
+    --margin-sm: 2rem;
+    --margin-md: 3rem;
+    --border: .2rem solid var(--black);
+}
+
+/* ----------The header--------*/
+*{
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none; border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+
+
+html{
+    font-size: 60%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+}
+
+.header{
+    position: fixed;
+    top: 0; left:0; right:0;
+    background: #fff;
+    padding: 2rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: 0 .7rem 1rem rgba(0, 0, 0, .1);
+}
+
+.header .logo{
+    font-size: 3rem;
+    color: #333;
+    font-weight: bolder;
+}
+
+.header .logo span{
+    color:var(--pink);
+}
+
+.header .navbar a{
+    font-size: 2rem;
+    padding: 0 1.5rem;
+    color: #666;
+}
+
+.header .navbar a:hover{
+    color:var(--pink);
+}
+
+.header .icons a{
+    font-size: 2.5rem;
+    color: #333;
+    margin-left: 1.5rem;
+}
+
+.header #toggler{
+    display: none;
+}
+
+.header .la-bars{
+    font-size: 3rem;
+    color: #333;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    border: .1rem solid rgba(0,0,0, .3);
+    display: none;
+}
+
+/* ---- icons menu ----*/
+.icons-menu{
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    padding: 10px 20px;
+    background: #fff;
+    width: 210px;
+    box-sizing: 0 55px 25px rgba(0,0,0,-1);
+    border-radius: 15px;
+    transition: 0.5s;
+    font-size: 1.7rem;
+    visibility: hidden;
+    opacity: 0;
+}
+.icons-menu.active{
+    top: 100px;
+    visibility: visible;
+    opacity: 1;
+}
+
+.icons-menu::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 70px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    transform: rotate(45deg);
+
+}
+
+.icons-menu h3{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0;
+    font-weight: 500;
+    color: #555;
+    line-height: 1.2em;
+}
+.icons-menu span{
+    font-size: 14px;
+    color: #cecece;
+    font-weight: 400;
+}
+
+.icons-menu ul li{
+    list-style: none;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+}
+
+.icons-menu ul li i{
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+.icons-menu ul li i:hover{
+    opacity: 1;
+}
+.icons-menu ul li a{
+    display: inline-block;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: 0.5s;
+}
+.icons-menu ul li:hover a{
+    color: var(--pink);
+}
+
+/* ----------The box content--------*/
+.container{
+    position: relative;
+    padding-bottom: 4%;
+}
+
+.list-container{
+    padding-top: 10rem;
+    margin-left: 4%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.left-col{
+    flex-basis: 62%;
+}
+
+.right-col{
+    flex-basis: 35%;
+}
+
+.left-col h1{
+    color: #333;
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 3%;
+}
+
+.left-col p{
+    font-size: 1.2rem;
+}
+
+.house{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 30px 0;
+    border-top: 1px solid #ccc;
+}
+
+.img{
+    flex-basis: 40%;
+}
+.info{
+    flex-basis: 58%;
+    font-size: 150%;
+}
+.info h3{
+    font-weight: 600;
+    color: #333;
+    font-size: 22px;
+    margin: 4px 0;
+}
+
+.img img{
+    /*
+    width: 100%;
+    border-radius: 12px; 
+     */
+     width: 80%;
+     height: 80%;
+     object-fit: cover;
+     border-radius: 5%;
+}
+
+.view-btn{
+    margin-top: 20%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn{
+    border: var(--border);
+    color: black;
+    cursor: pointer;
+    background: none;
+    font-size: 1.7rem;
+    padding: 1rem 3rem;
+}
+
+.btn:hover{
+    background: #0094EB;
+    color: #fff;
+}
+
+
+/* The Gsap animation part*/
+.left-col h1, .container-fluid, .header{
+    opacity: 0;
+    visibility: hidden;
+}
+@media (max-width:1000px){
+
+    html{
+        font-size: 50%;
+    }
+
+    .header{
+        padding: 2rem;
+    }
+
+    .header .icons{
+        width: 17rem;
+        zoom: 85%;
+    }
+
+    .header .la-bars{
+        display: block;
+    }
+
+    .header .navbar{
+        position: absolute;
+        top: 100%;left: 0;right: 0;
+        background: #eee;
+        border-top: .1rem solid rgba(0,0,0, .1);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    .header #toggler:checked ~ .navbar{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .header .navbar a{
+        margin-top: .1rem;
+        padding: 1.5rem;
+        background: #fff;
+        border: .1rem solid rgba(0,0,0, .1);
+        display: block;
+    }
+
+    .home{
+        padding-left: 4rem;
+    }
+
+    .home h2{
+        position: relative;
+        color: black;
+        font-size: 6rem;
+        padding-bottom: 3rem;
+    }
+
+    .home p{
+        width: 70%;
+    }
+
+    .home .btn{
+        margin-top: 6rem;
+    }
+
+    .left-col{
+        flex-basis: 95%;
+    }
+    
+    .right-col{
+        flex-basis: 0%;
+    }
+}
+
+@media (max-width:350px){
+    html{
+        font-size: 37%;
+    }
+}
+
+
+/* search bar css*/
+::selection{
+    color: #fff;
+    background: #664AFF;
+  }
+  .wrapper{
+    max-width: 450px;
+    margin: 10px;
+    
+  }
+  .wrapper .search-input{
+    background: #fff;
+    width: 100%;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
+  }
+  .search-input input{
+    height: 55px;
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 60px 0 20px;
+    font-size: 18px;
+    box-shadow: 0px 1px 5px rgba(0,0,0,0.1);
+  }
+  .search-input.active input{
+    border-radius: 5px 5px 0 0;
+  }
+  .search-input .autocom-box{
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+  .search-input.active .autocom-box{
+    padding: 10px 8px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .autocom-box li{
+    list-style: none;
+    padding: 8px 12px;
+    display: none;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+  }
+  .search-input.active .autocom-box li{
+    display: block;
+  }
+  .autocom-box li:hover{
+    background: #efefef;
+  }
+  .search-input .icon{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 55px;
+    width: 55px;
+    text-align: center;
+    line-height: 55px;
+    font-size: 20px;
+    color: #644bff;
+    cursor: pointer;
+  }
+
+  .icon2{
+    position: absolute;
+    right: 40px;
+    top: 0px;
+    height: 55px;
+    width: 55px;
+    text-align: center;
+    line-height: 55px;
+    font-size: 20px;
+    color: #644bff;
+    cursor: pointer;
+  }

@@ -1,0 +1,16 @@
+{
+    "name": "AskIt_Auction_App",
+    "short_name": "AuctionApp",
+    "start_url": ".",
+    "background_color": "",
+    "theme_color": "",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "Pic/askit-logo-70.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

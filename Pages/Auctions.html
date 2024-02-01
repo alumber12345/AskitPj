@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../css/auctions-style.css">
+    <!-- Gsap animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <!-- Link for the PWA android app -->
+    <link rel="manifest" href="../manifest.json">
+    <!--speechRecognition-->>
+    <script src="../JS/speechRecognition.js"></script>
+    <!-- PWA setting -->
+    <script src="../src/index.js"></script>
+</head>
+<body onload="showAds();">
+<!-- This is the website top header-->
+<div class="header">
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="las la-bars"></label>
+
+    <a href="../index.html" class="logo">Auction<span>.</span></a>
+
+    <nav class="navbar">
+        <a href="../index.html">Home</a>
+        <a href="../Pages/Auctions.html" id="search-link">Auctions</a>
+        <a href="../Pages/Sell.html">Sell</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <!--
+        <div id="beforLogin" class="icons">
+        <a href="Pages/Sign-in.html" class="las la-user" id="Login">Login</a>
+        <a id="useremail" class="las la-user" style="display:none"></a>
+        <a id="signoutlink" class="las la-user" style="display:none">Sign Out</a>
+        </div>
+    -->
+    <div class="icons" onclick="menuToggle();">
+        <a class="las la-user-circle" id="login-btn"></a>
+        <!--<div class="las la-bars" id="menu-btn"></div>-->
+    </div>
+    
+    <div class="icons-menu">
+		<h3 id="useremail" style="display: none;"><h3 id="guest" style="display: block;">GUEST</h3></h3>
+		<ul>
+			<li id="login-li"><i class="las la-sign-in-alt"></i><a href="../Pages/Sign-in.html" id="Login">Sign-in</a></li>
+			<li id="profile-li" style="display: none;"><i class="las la-user"></i><a href="Profile.html">Profile</a></li>
+			<li id="checkticket-li" style="display: none;"><i class="las la-clipboard-check" ></i><a href="Hisotry.html">Purchase Hisotry</a></li>
+			<li><i class="las la-question-circle"></i><a href="#contact">Help</a></li>
+			<li id="signoutlink-li" style="display: none;"><i class="las la-share-square"></i><a href="#" id="signoutlink">Sign-out</a></li>
+		</ul>
+	</div>
+
+
+</div>
+    <!-- This is selection -->
+<div class="container">
+    <div class="list-container">
+        <div class="left-col">
+            <p>All Options</p>
+            <h1>View auctions</h1>
+            <div class="wrapper">
+                <div class="search-input">
+                  <a href="" target="_blank" hidden></a>
+            <input type="text" id="search-bar" placeholder="Search..." onkeyup="if (event.keyCode === 13) filterItems()">
+            
+            <div class="autocom-box">
+                <li>car</li>
+                <li>carde</li>
+            </div>
+        
+        <div class="icon2"><a onclick="speech()"><i class="las la-microphone"></i></a></div>
+        <button type="submit" class="icon" id="search-btn"><i class="fas fa-search"></i></button>
+        
+        </div>
+    </div>
+            <div class="container-fluid">
+                <div id="addCharts"></div>
+                <div id="foundNoAds"></div>
+           
+            </div>
+        </div>
+        <div class="right-col"></div>
+    </div>
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+<script type="module">
+
+var firebaseConfig = {
+    apiKey: "AIzaSyCqb4XtymcsMEFdslrKHzmBf0NvKrfowrw",
+    authDomain: "iapja9.firebaseapp.com",
+    databaseURL: "https://iapja9-default-rtdb.firebaseio.com",
+    projectId: "iapja9",
+    storageBucket: "iapja9.appspot.com",
+    messagingSenderId: "466460234579",
+    appId: "1:466460234579:web:0f2e6ab5b0f077b32147a6",
+    measurementId: "G-1SM9S4MYV7"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+</script>
+
+<script src="../JS/DB.js"></script>
+<script src="../JS/"></script>
+<script src="../JS/animation_Auctions.js"></script>
+<!--Login funciton js-->
+<script type="module" src="../JS/logging.js"></script>
+</body>
+</html>

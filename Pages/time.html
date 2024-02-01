@@ -1,0 +1,122 @@
+
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <title>time</title>
+
+    <body>
+        <p id="countDownText"></p>
+        <div id="root"></div>
+        <p id="demo"></p>
+        <script>
+            var Time =15;
+            
+            var countdown = setInterval(function(){
+                --Time;
+                document.getElementById("countDownText").innerHTML= Time;
+                if(Time <= 0){
+                    Time = 15;
+                }
+            }, 1000);
+        </script>
+
+
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+    
+             var id = new URL(location.href).searchParams.get('id');
+             console.log(id);
+    
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+                apiKey: "AIzaSyCqb4XtymcsMEFdslrKHzmBf0NvKrfowrw",
+                authDomain: "iapja9.firebaseapp.com",
+                databaseURL: "https://iapja9-default-rtdb.firebaseio.com",
+                projectId: "iapja9",
+                storageBucket: "iapja9.appspot.com",
+                messagingSenderId: "466460234579",
+                appId: "1:466460234579:web:0f2e6ab5b0f077b32147a6",
+                measurementId: "G-1SM9S4MYV7"
+            };
+    
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getDatabase(app);
+
+            import { getDatabase, ref, onValue, child, push, update} from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+            
+
+            const db = getDatabase();
+
+            const starCountRef = ref(db,`/Item/`);
+            onValue(starCountRef, (snapshot) => {
+            console.log(snapshot.val());
+                
+            
+            var data = snapshot.val();
+            let array = [];
+            
+            for(let key in data){
+                data[key].adKey = key;
+                array.push(data[key]);
+            }
+
+            
+            
+
+            localStorage.setItem('adArray', JSON.stringify(array));
+            console.log('array', array)
+            
+            var Time = 15;
+            var countdown = setInterval(function(){
+                --Time;
+                if(Time <= 0){
+            const price2 = array.map((pp) => pp.ProductPrices -50); 
+            console.log(price2);
+            
+            const key = array.map((pp) => pp.adKey);
+            console.log(key);
+            let text = "";
+            for (let i =0; i<price2.length; i++){
+
+                update(ref(db,"Item/"+ key[i]),{
+                    ProductPrices: price2[i],
+                })
+                .then(()=>{
+                
+                })
+                .catch((error)=>{
+                
+                })
+
+                text += key[i]
+                text += price2[i]+ "<br>";
+                location.reload();
+                
+            }
+            document.getElementById("demo").innerHTML = text;
+            
+            Time = 15;
+                }
+             }, 1000);
+             
+            
+
+            document.getElementById('root').innerHTML += array.map((Item) => {
+            return ` ${Item.ProductPrices}`
+            })
+            });
+        
+        </script>
+
+    </body>
+</html>

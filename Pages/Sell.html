@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="../css/sell-style.css">
+    <!-- Gsap animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <!-- Link for the PWA android app -->
+    <link rel="manifest" href="../manifest.json">
+    <!-- PWA setting -->
+    <script src="../src/index.js"></script>
+</head>
+<body>
+<!-- This is the website top header-->
+<div class="header">
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="las la-bars"></label>
+
+    <a href="../index.html" class="logo">Auction<span>.</span></a>
+
+    <nav class="navbar">
+        <a href="../index.html">Home</a>
+        <a href="Auctions.html">Auctions</a>
+        <a href="#">Sell</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <!--
+    <div id="beforLogin" class="icons">
+        <a href="Sign-in.html" class="las la-user" id="Login">Login</a>
+        <a id="useremail" class="las la-user" style="display:none"></a>
+        <a id="signoutlink" class="las la-user" style="display:none">Sign Out</a>
+    </div>
+    -->
+
+    <div class="icons" onclick="menuToggle();">
+      <a class="las la-user-circle" id="login-btn"></a>
+      <!--<div class="las la-bars" id="menu-btn"></div>-->
+  </div>
+  
+  <div class="icons-menu">
+		<h3 id="useremail" style="display: none;"><h3 id="guest" style="display: block;">GUEST</h3></h3>
+		<ul>
+			<li id="login-li"><i class="las la-sign-in-alt"></i><a href="../Pages/Sign-in.html" id="Login">Sign-in</a></li>
+			<li id="profile-li" style="display: none;"><i class="las la-user"></i><a href="Profile.html">Profile</a></li>
+			<li id="checkticket-li" style="display: none;"><i class="las la-clipboard-check" ></i><a href="Hisotry.html">Purchase Hisotry</a></li>
+			<li><i class="las la-question-circle"></i><a href="#contact">Help</a></li>
+			<li id="signoutlink-li" style="display: none;"><i class="las la-share-square"></i><a href="#" id="signoutlink">Sign-out</a></li>
+		</ul>
+	</div>
+
+  
+</div>
+    <!-- This is selection -->
+<div class="container">
+    <div class="list-container">
+        <div class="left-col">
+
+        </div>
+        <div class="right-col">
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Post auciton form -->
+<div class="wrapper">
+        <div class="title">
+          Post auction Form
+        </div>
+        <div class="form" id="create_auction_form">
+           <div class="inputfield">
+              <label>Product Name</label>
+              <input type="text" class="input" id="product_name">
+           </div>  
+            <div class="inputfield">
+              <label>Staring Prices</label>
+              <input type="number" class="input" id="product_price">
+           </div>  
+           <div class="inputfield">
+              <label>Closing time</label>
+              <input type="date" class="input" value="2022-08-26" min="2022-08-01" max="2022-08-31" id="closing_time">
+           </div>  
+            <div class="inputfield">
+              <label>Category</label>
+              <div class="custom_select">
+                <select id="category">
+                  <option value="">None</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Jewelry">Jewelry</option>
+                  <option value="Furniture">Furniture</option>
+                  <option value="Drawing">Drawing</option>
+                </select>
+              </div>
+           </div> 
+           <div class="inputfield">
+            <label>Product condition</label>
+            <input type="text" class="input" id="product_condition">
+            </div> 
+            <div class="inputfield">
+              <label>Materials</label>
+              <input type="text" class="input" id="product_materials">
+           </div> 
+          <div class="inputfield">
+              <label>Size</label>
+              <input type="text" class="input" id="product_size">
+           </div> 
+          <div class="inputfield">
+              <label>Description</label>
+              <textarea class="textarea" form="create_auction_form" id="product_description"></textarea>
+           </div> 
+          <div class="inputfield">
+              <label>Quantity</label>
+              <input type="text" class="input" id="product_quantity">
+           </div> 
+          <div class="choosepic">
+            <label>Product picture</label>
+            <!--<input type="file" class="input" id="product_pic" accept="image/png, image/jpeg">-->
+            <button id="selbtn">Select image</button>
+          </div> 
+          <div class="img-label">
+            <label id="namelabel"></label>
+            <label id="extlabel"></label>
+            <br>
+          </div>
+          <img id="myimg"><label id="upProgress"></label>
+
+          <div class="inputfield terms">
+              <label class="check">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+              <p>Agreed to terms and conditions</p>
+           </div> 
+          <div class="inputfield">
+            <input type="submit" value="Post" class="btn" id="upload-btn">
+          </div>
+
+<script type="module">
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js";
+           
+const firebaseConfig = {
+apiKey: "AIzaSyCqb4XtymcsMEFdslrKHzmBf0NvKrfowrw",
+authDomain: "iapja9.firebaseapp.com",
+databaseURL: "https://iapja9-default-rtdb.firebaseio.com",
+projectId: "iapja9",
+storageBucket: "iapja9.appspot.com",
+messagingSenderId: "466460234579",
+appId: "1:466460234579:web:0f2e6ab5b0f077b32147a6",
+measurementId: "G-1SM9S4MYV7"
+};
+          
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+import {getStorage, ref as sRef, uploadBytesResumable, getDownloadURL}
+from "https://www.gstatic.com/firebasejs/9.9.3/firebase-storage.js"
+
+// Firebase Realtime Database
+import {getDatabase, ref, set, child, get, update, remove}
+from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+const realdb = getDatabase();
+
+ //----------------------Variables & References-------------------------------------//
+var files = [];
+var reader = new FileReader();
+
+//Variables for image upload
+var namelabel = document.getElementById('namelabel');
+var extlabel = document.getElementById('extlabel');
+var myimg = document.getElementById('myimg');
+var proglabel = document.getElementById('upProgress');
+var SelBtn = document.getElementById('selbtn');
+var PostBtn = document.getElementById('upload-btn');
+
+//Variables for upload form
+var name = document.getElementById('product_name');
+var prices = document.getElementById('product_price');
+var time = document.getElementById('closing_time');
+var category = document.getElementById('category');
+var condition = document.getElementById('product_condition');
+var materials = document.getElementById('product_materials');
+var size = document.getElementById('product_size');
+var description = document.getElementById('product_description');
+var quantity = document.getElementById('product_quantity');
+var RandomNumber = Math.floor((Math.random() * 1000000));
+
+
+
+//---------------------Insert Data Function--------------------------------//
+function InserData(URL){
+  set(ref(realdb, "Item/" + RandomNumber),{
+    ProductName: name.value,
+    ProductPrices: prices.value,
+    CloseTime: time.value,
+    Category: category.value,
+    ProductCondition: condition.value,
+    Material: materials.value,
+    ProductSize: size.value,
+    Description: description.value,
+    Quantity: quantity.value,
+    ImgUrl: URL,
+  })
+  .then(()=>{
+    alert("Data stored successfully");
+  })
+  .catch((error)=>{
+    alert("Upload unsuccessful, error: " + error);
+  });
+}
+
+function ValidateName(){
+  var regex = /[\.#$\[\]]/
+  return !(regex.test(namelabel.innerHTML));
+}
+
+//---------------------------Get file name & extention ---------------------------//
+var input = document.createElement('input');
+input.type = 'file';
+
+input.onchange = e =>{
+  files = e.target.files;
+
+  var extention = GetFileExt(files[0]);
+  var name = GetFileName(files[0]);
+
+  namelabel.innerHTML = name;
+  extlabel.innerHTML = extention;
+
+  reader.readAsDataURL(files[0]);
+}
+
+reader.onload = function(){
+  myimg.src = reader.result;
+}
+
+//---------------------------Get file name & extention [Function]---------------------------//
+
+SelBtn.onclick = function(){
+  input.click();
+}
+
+function GetFileExt(file){
+  var temp = file.name.split('.');
+  var ext = temp.slice((temp.length-1),(temp.length));
+  return '.' + ext[0];
+}
+
+function GetFileName(file){
+  var temp = file.name.split('.');
+  var fname = temp.slice(0,-1).join('.');
+  return fname;
+}
+
+//---------------------------upload image---------------------------//
+
+async function uploadProcess(){
+  var ImgToUpload = files[0];
+
+  var ImgName = namelabel.innerHTML + extlabel.innerHTML;
+
+  if(!ValidateName()){
+    alert('Image name contain ".", "#", "$", "[", or "]"');
+    return;
+  }
+
+  const metaData = {
+    contentType: ImgToUpload.type
+  }
+
+  const storage = getStorage();
+
+  const stroageRef = sRef(storage, "Images/"+ImgName);
+
+  const UploadTask = uploadBytesResumable(stroageRef, ImgToUpload, metaData);
+
+  UploadTask.on('state-changed',(snapshot)=>{
+    var progess = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    proglabel.innerHTML = "Upload " + progess + "%";
+  },
+  (error) =>{
+    alert("error: image not uploaded");
+  },
+  ()=>{
+    getDownloadURL(UploadTask.snapshot.ref).then((downloadURL)=>{
+      InserData(downloadURL);
+    });
+  }
+  );
+}
+
+//---------------------------Funciton for Realtime databse--------------------------//
+
+
+
+//----------------------Assign events to Button------------------------------//
+//UpBtn.onclick = uploadProcess;
+PostBtn.addEventListener('click', function(){
+  uploadProcess();
+})
+
+</script>
+        </div>
+    </div>	
+
+<script src="../JS/animation_Sell.js"></script>
+
+<!--Login funciton js-->
+<script type="module" src="../JS/logging.js"></script>
+</body>
+</html>

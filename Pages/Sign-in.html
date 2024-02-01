@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- =====  Line Awesome ===== -->
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    
+    <!-- =====  CSS for icons ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!-- ===== CSS for page style===== -->
+    <link rel="stylesheet" href="../css/Login.css">
+
+    <title>Login & Registration Form</title>
+
+    <!-- Link for the PWA android app -->
+    <link rel="manifest" href="../manifest.json">
+    <!-- PWA setting -->
+    <script src="../src/index.js"></script>
+</head>
+
+<body>
+    
+    <div class="container">
+        <div class="forms">
+            <div class="form login">
+                <span class="title">Login</span>
+
+                <form action="#">
+                    <div class="input-field">
+                        <input type="text" id="login-email" placeholder="Enter your email" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="login-password" class="password" placeholder="Enter your password" required>
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input type="checkbox" id="logCheck">
+                            <label for="logCheck" class="text">Remember me</label>
+                        </div>
+                        
+                        <a href="#" class="text">Forgot password?</a>
+                    </div>
+                    
+                        <div class="input-field button">
+                            <input type="button" id="login" value="Login Now">
+                        </div>
+
+                    <div class="or-container">
+                        <div class="line-separator"></div>
+                        <div class="or-label">or</div>
+                        <div class="line-separator"></div>
+                    </div>
+
+                    <div class="buttonDiv" id="buttonDiv">
+                        <div class="google-icon-wrapper">
+                            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                        </div>
+                        <p class="btn-text"><b>Sign in with google</b></p>
+                    </div>
+
+        
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Not a member?
+                        <a href="#" class="text signup-link">Signup now</a>
+                    </span>
+                </div>
+                <a href="../index.html" class="backTag">Don't want to login yet? click me back</a>
+            </div>
+
+            <!-- Registration Form -->
+            <div class="form signup">
+
+                <span class="title">Registration</span>
+
+                <form action="#">
+                    <div class="input-field">
+                        <input type="text"  id="signup-username"placeholder="Enter your name" required>
+                        <i class="uil uil-user"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" id="signup-email" placeholder="Enter your email" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password"  class="password" placeholder="Create a password" required>
+                        <i class="uil uil-lock icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="signup-password" class="password" placeholder="Confirm a password" required>
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input type="checkbox" id="sigCheck">
+                            <label for="sigCheck" class="text">Remember me</label>
+                        </div>
+                        
+                        <a href="#" class="text">Forgot password?</a>
+                    </div>
+                    
+                    <a>
+                        <div class="input-field button">
+                            <input type="button" id="signup" value="Sign up">
+                          
+                        </div>
+                    </a>
+
+                    <a href="../Pages/Sign-in.html" class="backTag">Have a accoun aready? click me</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="../JS/script.js"></script>
+    <script type="module" src="../JS/userCreateLogin.js"></script>
+    <script type="module" src="../JS/googleLogin.js"></script>
+
+</body>
+
+</html>

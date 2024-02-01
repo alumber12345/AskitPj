@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>AskIt Auction Application</title>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google font : Montserrat-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <!-- Link for the PWA android app -->
+    <link rel="manifest" href="manifest.json">
+    <link ref="apple-touch-icon" href="Pic/icon2.png">
+    <!-- Gsap animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+
+
+
+</head>
+<body>
+<!-- This is the website top header-->
+<div class="header">
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="las la-bars"></label>
+
+    <a href="#" class="logo">Auction<span>.</span></a>
+
+    <nav class="navbar">
+        <a href="#">Home</a>
+        <a href="Pages/Auctions.html">Auctions</a>
+        <a href="Pages/Sell.html">Sell</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!--
+        <div id="beforLogin" class="icons">
+        <a href="Pages/Sign-in.html" class="las la-user" id="Login">Login</a>
+        <a id="useremail" class="las la-user" style="display:none"></a>
+        <a id="signoutlink" class="las la-user" style="display:none">Sign Out</a>
+        </div>
+    -->
+    <div class="icons" onclick="menuToggle();">
+        <a class="las la-user-circle" id="login-btn"></a>
+        <!--<div class="las la-bars" id="menu-btn"></div>-->
+    </div>
+    
+    <div class="icons-menu">
+		<h3 id="useremail" style="display: none;"><h3 id="guest" style="display: block;">GUEST</h3></h3>
+		<ul>
+			<li id="login-li"><i class="las la-sign-in-alt"></i><a href="../Pages/Sign-in.html" id="Login">Sign-in</a></li>
+			<li id="profile-li" style="display: none;"><i class="las la-user"></i><a href="Pages/Profile.html">Profile</a></li>
+			<li id="checkticket-li" style="display: none;"><i class="las la-clipboard-check" ></i><a href="Page/Hisotry.html">Purchase Hisotry</a></li>
+			<li><i class="las la-question-circle"></i><a href="#contact">Help</a></li>
+			<li id="signoutlink-li" style="display: none;"><i class="las la-share-square"></i><a href="#" id="signoutlink">Sign-out</a></li>
+		</ul>
+	</div>
+
+</div>
+    <!-- This is he main conent-->
+    <section class="home">
+        <h2>Welcome,
+        <br>
+        to HK Auciton Center</h2>
+        <p>Our goal is to make the best website for you to get your 
+            product in a Auciton. In here, you will have a great place to 
+            brings the most value to the market.
+        </p>
+        <div class="btn">
+            <a class="black" href="#footer-distributed">Learn More</a>
+            <a class="blue" href="Pages/Auctions.html">View Aucitons</a>
+        </div>
+    </section>
+
+<!-- features -->
+<section id="features">
+    <h1>What would you like to find?</h1>
+    <!-- <p>We got some awesome function that others don't have.</p> -->
+    <div class="fea-base">
+        <a class="fea-box">
+            <i class="las la-mobile" onclick="categoryClicked('Phone & Gadgets')"></i>
+            <h3>Phone & Gadgets</h3>
+            <p></p>
+        </a>
+        <a class="fea-box">
+                <i class="las la-tshirt" onclick="categoryClicked('Fashion')"></i>
+                <h3>Fashion</h3>
+                <p></p>
+        </a>
+        <a class="fea-box">
+                <i class="las la-gem" onclick="categoryClicked('Luxury')"></i>
+                <h3>Luxury</h3>
+                <p></p>
+        </a>
+        <a class="fea-box">
+                <i class="las la-car-side" onclick="categoryClicked('Cards')"></i>
+                <h3>Cards</h3>
+                <p></p>
+        </a>
+        <a class="fea-box">
+            <i class="las la-hand-point-right" onclick="categoryClicked('Other')"></i>
+            <h3>Others</h3>
+            <p></p>
+        </a>
+    </div>
+</section>
+
+<!-- Product row -->
+<section id="product-list">
+    <div class="product-description">
+        <h1>Recent Auction</h1>
+    </div>
+    <div id="product-container" class="product-row"></div>
+
+</section>
+
+
+<!-- contact -->
+<section class="contact" id="contact">
+
+    <h1 class="heading"><span>contact</span> us </h1>
+
+    <div class="list-container">
+        <div class="left-col">
+            <div class="row">
+                <iframe title="Google-map-box" class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3691.
+                971533704262!2d114.17780955888004!3d22.279068130646912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.
+                1!3m3!1m2!1s0x3404010b00000075%3A0x3a3442fb3a62e411!2sASK%20IT%20Limited!5e0!3m2!1szh-TW!2shk!4v1660550637659!5m2!1szh-TW!2shk" 
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    
+        <div class="right-col">
+            <form action="">
+                <h3>get in touch</h3>
+                <input type="text" placeholder="name" class="box">
+                <input type="email" placeholder="email" class="box">
+                <input type="number" placeholder="number" class="box">
+                <textarea placeholder="message" class="box" cols="30" rows="10"></textarea>
+                <input type="submit" value="send message" class="btn">
+            </form>
+        </div>
+    </div>
+
+</section>
+
+<!-- footer -->
+<footer class="footer-distributed">
+
+    <div class="footer-left">
+        <h3>Ask<span>IT</span></h3>
+
+        <p class="footer-links">
+            <a href="#">Home</a>
+            |
+            <a href="#">About</a>
+            |
+            <a href="#">Contact</a>
+            |
+            <a href="#">Blog</a>
+        </p>
+
+        <p class="footer-company-name">Please feel free to <strong>contact</strong> us </p>
+    </div>
+
+    <div class="footer-center">
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>Hong Kong</span>
+                Causeway Bay</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>(852) 3461 3077</p>
+        </div>
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="#">ivetesta9@gmail</a></p>
+        </div>
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>About the company</span>
+            <strong>AskIt</strong> has 10-year experience piles up to serve as the start up or scale up foundation for any business.
+            Whether your business is either big or small, our professional Attitude, 
+            Skill and Knowledge provide you the best Intelligent Talent and Information Technology. Start your journey with us now!
+        </p>
+        <div class="footer-icons">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-youtube"></i></a>
+        </div>
+    </div>
+</footer>
+
+<!--Load the animation js file-->
+<script src="JS/animation_index.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+    apiKey: "AIzaSyCqb4XtymcsMEFdslrKHzmBf0NvKrfowrw",
+    authDomain: "iapja9.firebaseapp.com",
+    databaseURL: "https://iapja9-default-rtdb.firebaseio.com",
+    projectId: "iapja9",
+    storageBucket: "iapja9.appspot.com",
+    messagingSenderId: "466460234579",
+    appId: "1:466460234579:web:0f2e6ab5b0f077b32147a6",
+    measurementId: "G-1SM9S4MYV7"
+  };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    function showResbids() {
+      let adArray = [];
+
+      const firebaseRef = firebase.database().ref("Item");
+      firebaseRef.once("value", function (snapshot) {
+        const data = snapshot.val();
+        let counter = 0;
+        for (let key in data) {
+          if (counter >= 5) break;
+          data[key].adKey = key;
+          adArray.push(data[key]);
+          counter++;
+        }
+
+        localStorage.setItem("adArray", JSON.stringify(adArray));
+
+        displayResbid(adArray);
+      });
+    }
+
+    function displayResbid(adArray) {
+      const productContainer = document.getElementById("product-container");
+      productContainer.innerHTML = adArray
+        .map((val) => {
+          return `
+            <div class="product" id="${val.adKey}">
+              <img src="${val.ImgUrl}">
+              <div class="star">
+                <i class="las la-star"></i>
+                <i class="las la-star"></i>
+                <i class="las la-star"></i>
+                <i class="las la-star"></i>
+                <i class="las la-star"></i>
+              </div>
+              <h5 class="p-name">${val.ProductName}</h5>
+              <p>${val.Category}</p>
+              <p>Quantity: ${val.Quantity}</p>
+              <button class="btn" onclick="location.href='../Pages/detail.html?id=${val.adKey}'">View details</button>
+            </div>
+          `;
+        })
+        .join("");
+    }
+    showResbids();
+  </script>
+  <script src="src/index.js"></script>
+  <script src="JS/DB.js"></script>
+  <script type="module" src="JS/logging.js"></script>
+</body>
+</html>

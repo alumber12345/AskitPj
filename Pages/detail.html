@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="../css/detail-style.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <!-- Gsap animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <!-- Link for the PWA android app -->
+    <link rel="manifest" href="../manifest.json">
+    <!-- PWA setting -->
+    <script src="../src/index.js"></script>
+    <!-- get JQ -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script src="../JS/viewtable.js"></script>
+
+
+</head>
+
+<body>
+    <!-- This is the website top header-->
+    <div class="header">
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="las la-bars"></label>
+
+        <a href="../index.html" class="logo">Auction<span>.</span></a>
+
+        <nav class="navbar">
+            <a href="../index.html">Home</a>
+            <a href="../Pages/Auctions.html">Auctions</a>
+            <a href="../Pages/Sell.html">Sell</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <!--
+        <div id="beforLogin" class="icons">
+        <a href="Pages/Sign-in.html" class="las la-user" id="Login">Login</a>
+        <a id="useremail" class="las la-user" style="display:none"></a>
+        <a id="signoutlink" class="las la-user" style="display:none">Sign Out</a>
+        </div>
+    -->
+        <div class="icons" onclick="menuToggle();">
+            <a class="las la-user-circle" id="login-btn"></a>
+            <!--<div class="las la-bars" id="menu-btn"></div>-->
+        </div>
+
+        <div class="icons-menu">
+            <h3>User setting <span>for you</span></h3>
+            <ul>
+                <li><i class="las la-sign-in-alt"></i><a href="Sign-in.html">Sign-in</a></li>
+                <li><i class="las la-user"></i><a href="Profile.html">Profile</a></li>
+                <li><i class="las la-clipboard-check"></i><a href="check-ticket.html">Purchase Hisotry</a></li>
+                <li><i class="las la-question-circle"></i><a href="../index.html">Help</a></li>
+                <li><i class="las la-share-square"></i><a href="#">Sign-out</a></li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- This is selection -->
+
+
+    <div id="containers"></div>
+
+
+    <!-- footer -->
+    <footer class="footer-distributed">
+
+        <div class="footer-left">
+            <h3>Ask<span>IT</span></h3>
+
+            <p class="footer-links">
+                <a href="#">Home</a>
+                |
+                <a href="#">About</a>
+                |
+                <a href="#">Contact</a>
+                |
+                <a href="#">Blog</a>
+            </p>
+
+            <p class="footer-company-name">Please feel free to <strong>contact</strong> us </p>
+        </div>
+
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>Hong Kong</span>
+                    Causeway Bay</p>
+            </div>
+
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>(852) 3461 3077</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="#">ivetesta9@gmail</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>About the company</span>
+                <strong>AskIt</strong> has 10-year experience piles up to serve as the start up or scale up foundation
+                for any business.
+                Whether your business is either big or small, our professional Attitude,
+                Skill and Knowledge provide you the best Intelligent Talent and Information Technology. Start your
+                journey with us now!
+            </p>
+            <div class="footer-icons">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" defer>
+        //-----------------Js code for responsive animation-------------------------//
+        document.querySelectorAll(".text-input").forEach((element) => {
+            element.addEventListener("blur", (event) => {
+                if (event.target.value != "") {
+                    event.target.nextElementSibling.classList.add("filled");
+                } else {
+                    event.target.nextElementSibling.classList.remove("filled");
+                }
+            });
+        });
+
+        //-------------------Import databse + Configuration-----------------------------//
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-analytics.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-auth.js";
+        import { getDatabase, ref, set, child, get, update, remove, onValue, push } from "https://www.gstatic.com/firebasejs/9.9.3/firebase-database.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyCqb4XtymcsMEFdslrKHzmBf0NvKrfowrw",
+            authDomain: "iapja9.firebaseapp.com",
+            databaseURL: "https://iapja9-default-rtdb.firebaseio.com/",
+            projectId: "iapja9",
+            storageBucket: "iapja9.appspot.com",
+            messagingSenderId: "466460234579",
+            appId: "1:466460234579:web:0f2e6ab5b0f077b32147a6",
+            measurementId: "G-1SM9S4MYV7"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth();
+        const user = auth.currentUser;
+        // Firebase Realtime Database
+        const realdb = getDatabase();
+        var id = new URL(location.href).searchParams.get('id');
+        var uid = localStorage.getItem('user');
+
+        //----------------------Variables & References-------------------------------//
+        var Pricesdb;
+        var PricesResult;
+        var NewPrice;
+        var NewPricedb;
+        var email;
+        var password;
+        var username;
+        var currentDatedb;
+
+        const authdb = ref(realdb, `/users/${uid}`);
+        onValue(authdb, (snapshot) => {
+            email = snapshot.val().email;
+            password = snapshot.val().password;
+            username = snapshot.val().username;
+
+        });
+
+        const Quantitydb = ref(realdb, `/Item/${id}`);
+        onValue(Quantitydb, (snapshot) => {
+            let Category = snapshot.val().Category;
+            let CloseTime = snapshot.val().CloseTime;
+            let Description = snapshot.val().Description;
+            let ImgUrl = snapshot.val().ImgUrl;
+            let Material = snapshot.val().Material;
+            let Price = snapshot.val().Price;
+            let ProductCondition = snapshot.val().ProductCondition;
+            let ProductName = snapshot.val().ProductName;
+            let ProductPrices = snapshot.val().ProductPrices;
+            let ProductSize = snapshot.val().ProductSize;
+            let Quantity = snapshot.val().Quantity;
+            let Time = snapshot.val().Time;
+
+            show(Category, Description, ImgUrl, Material, Price, ProductCondition, ProductName, ProductPrices, ProductSize, Quantity, Time, email, password, username);
+        });
+
+
+
+        function show(Category, Description, ImgUrl, Material, Price, ProductCondition, ProductName, ProductPrices, ProductSize, Quantity, Time, email, password, username) {
+
+            document.getElementById('containers').innerHTML =
+                `<div class="container">
+            <div class="list-container">
+            <div class="left-col">
+            
+			<h1><a href="../Pages/Auctions.html" class="button-reture"><</a>
+			${ProductName}</h1>.
+			<div class="img">
+                <img src="${ImgUrl}">
+            </div>
+
+        </div>
+        <div class="right-col">
+            <div class="content">
+                <h1>${ProductName}</h1>
+                    <a href="#" class="button3" id="BitButton" class="BitButton" onclick="BitButton();">Bit</a>
+                    <a href="#" class="button3" id="tablebtn" class="tablebtn" onclick="tablebtn();">Show Table</a>
+                    <div class="text" id="text" >
+                        <div class="house" id="bit">
+                        (Each auction price increased by $100)
+                        <br>
+                        <div>Current Bid:<p>HKD ${ProductPrices}</p>
+                        <div class="auction-price">
+                        Your auction price will be:${Price}
+                        </div>
+                        </div>
+                        </div>
+                <h2>Closed: <p id="demo"></p></h2><br>
+                
+                <div class="view-btn">
+                    <button class="button" id="BidBtn" >Bid</button>
+                </div>                 
+            </div>
+            </div>
+                
+             
+                    <br>
+                    
+
+                    <table id ="bidstable" class="bidstable" style ="width:50%" hidden>
+                                    
+                <tr>
+                    <th>BIDDER</th>
+                    <th>BID</th>
+                    <th>TIME</th>
+                </tr>
+                <tr>
+                    <td>IsaacChan</td>
+                    <td>1000</td>
+                    <td>29/1/2023</td>
+                </tr>
+                <tr>
+                    <td>YukoWu</td>
+                    <td>1100</td>
+                    <td>29/1/2023</td>
+                </tr>
+                
+                </table>
+                            
+                    </div>
+                </div>
+            </div>  
+            
+
+
+        <div class="description">
+             <div class="section-title">
+             AUCTION DETAILS
+            </div>
+
+        <div class="description-detail">
+            <div class="fs">
+            <h4>Description</h4>
+            <p>${Description}</p>
+
+            <h4>Condition</h4>
+            <p>${ProductCondition}</p>
+
+            <h4>Materials</h4>
+            <p>${Material}</p>
+
+            <h4>Size</h4>
+            <p>${ProductSize}</p>
+
+          
+                
+    
+                </div>
+            </div>
+        </div>`
+
+            //------------------click bit button function------------------------//
+
+            var BidBtn = document.getElementById('BidBtn');
+            BidBtn.addEventListener("click", function () {
+                bitadd = true;
+                getdata();
+                //add bit table
+                var tbdb = ref(realdb, `/Item/${id}`);
+                onValue(tbdb, (snapshot) => {
+                    if (snapshot.exists()) {
+                        var content = '';
+                        //snapshot.forEach(function (data) {
+                        content += '<tr>';
+                        content += '<td>' + username + '</td>';
+                        content += '<td>' + (ProductPrices + 100) + '</td>';
+                        content += '<td>' + Time + '</td>';
+                        content += '</tr>';
+                        //});
+                        $('#bidstable').append(content);
+                    }
+                });
+            }, false);
+        }
+
+
+
+        function search_animal() {
+            let input = document.getElementById('searchbar').value
+            input = input.toLowerCase();
+            let x = document.getElementsByClassName('animals');
+
+            for (i = 0; i < x.length; i++) {
+                if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                    x[i].style.display = "none";
+                }
+                else {
+                    x[i].style.display = "list-item";
+                }
+            }
+        }
+
+        //------------------update Quantity to database------------------------//
+        function updatePrice() {
+            var currentdate = new Date();
+            var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth() + 1) + "/"
+                + currentdate.getFullYear() + " - "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+            update(ref(realdb, `Item/${id}`), {
+                ProductPrices: PricesResult,
+                Price: NewPrice,
+                Time: datetime,
+            })
+        }
+
+        //------------------get data------------------------//
+        function getdata() {
+            const dbref = ref(realdb);
+
+            get(child(dbref, `Item/${id}`)).then((snapshot) => {
+                Pricesdb = snapshot.val().ProductPrices;
+                NewPricedb = snapshot.val().Price;
+                PricesResult = Pricesdb + 100;
+                NewPrice = PricesResult + 100;
+                console.log(PricesResult);
+                console.log(NewPrice);
+                alert("The auction amount will be $" + PricesResult + ", confirm the auction?");
+
+            })
+                .catch((error) => {
+                    alert("unsuccessful, error: " + error);
+                })
+                .then(() => {
+                    removeData()
+                })
+                .then(() => {
+                    updatePrice()
+                })
+        }
+
+        //-----------remove data from database-------------//
+        function removeData() {
+            const dbref = ref(realdb);
+            get(child(dbref, `Item/${id}`)).then((snapshot) => {
+                if (PricesResult <= 0) {
+                    remove(ref(realdb, `Item/${id}`));
+                    alert("Notification: you just bought the last one");
+                    window.location.href = "Auctions.html"
+                }
+            })
+        }
+
+        //------------------Countdown Timer------------------------//
+        var bitadd = false;
+        var countDownDate = new Date();
+        //countDownDate.setMinutes(countDownDate.getMinutes() + 1);
+        countDownDate.setSeconds(countDownDate.getSeconds() + 10);
+        countDownDate = countDownDate.getTime();
+
+        window.onload = function () {
+            var x = setInterval(function () {
+                // Get todays date and time
+                var now = Date.now();
+
+                // Find the distance between now an the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                console.log("localStorage.getItem(`${id}`)", localStorage.getItem(`${id}`));
+
+                // Display the result in the element with id="demo"
+                document.getElementById("demo").innerHTML = + hours + "h" + " " + minutes + "m" + " " + seconds + "s";
+                //
+                //if (localStorage.getItem(uid) == null) {      
+                //document.getElementById("BidBtn").disabled = true;
+                //}
+                //
+
+                if (localStorage.getItem(`${id}`) != null && document.getElementById("demo")) {      
+                    document.getElementById("demo").innerHTML = "EXPIRED";
+                    document.getElementById("BidBtn").disabled = true;
+                    clearInterval(x);
+                }
+                // If the count down is finished, write some text 
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("demo").innerHTML = "EXPIRED";
+                    localStorage.setItem(`${id}`, id);
+                    if (bitadd) {
+                        // Display a confirm dialog in a popup window
+                        const confirmed = window.confirm('Are you sure you want to bit this item?');
+
+                        // Check if the user clicked "Yes" or "No"
+                        if (confirmed) {
+                            // User clicked "Yes"
+                            console.log('bit.');
+                            location.href = "../Pages/Payment.html";
+                        } else {
+                            // User clicked "No"
+                            console.log('not bit.');
+                        }
+
+                    };
+                }
+            }, 1000);
+
+        }
+        // Update the count down every 1 second
+        
+
+    </script>
+
+
+    <script src="../JS/animation_detail.js"></script>
+    <!--Login funciton js-->
+    <script type="module" src="../JS/logging.js"></script>
+
+
+</body>
+
+</html>
